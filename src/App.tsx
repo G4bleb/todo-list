@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { addItemForm } from "./AddItemForm";
-import "./App.css";
 import { itemsList } from "./ItemsList";
 import { Item } from "./interfaces/Item";
 import { v4 as uuid } from "uuid";
@@ -38,7 +37,7 @@ function App() {
   console.log(JSON.stringify(Array.from(items.entries()), null, 2));
 
   return (
-    <div className="App">
+    <div className="min-h-screen flex flex-col justify-center items-center">
       {itemsList({
         items,
         onItemClick: crossItem,

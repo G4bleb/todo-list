@@ -11,9 +11,18 @@ export function addItemForm({ onSubmit }: { onSubmit(newItem: string): void }) {
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <input type="text" name="item"></input>
-      <input type="submit" name="submit" value="Add"></input>
+    <form className="w-80 flex justify-between pt-2 " onSubmit={submitHandler}>
+      <input
+        type="text"
+        name="item"
+        className="border border-gray-300 p-1 rounded"
+      ></input>
+      <input
+        type="submit"
+        name="submit"
+        value="Add"
+        className="border border-gray-300 mx-1 px-2 w-full hover:bg-gray-200 rounded"
+      ></input>
     </form>
   );
 }

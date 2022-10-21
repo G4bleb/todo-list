@@ -13,7 +13,7 @@ export function itemsList({
   items.forEach((item, id) => {
     elems.push(
       <li
-        className="border-t border-t-gray-300 first:border-t-0 hover:bg-gray-100 p-2 flex content-between justify-between select-none hover:cursor-pointer"
+        className="border-t border-t-gray-300 first:border-t-0 first:rounded-t-lg last:rounded-b-lg hover:bg-gray-100 p-2 flex content-between justify-between select-none hover:cursor-pointer"
         onClick={() => {
           onItemClick(id);
         }}

@@ -24,6 +24,9 @@ ul li {
   user-select: none;
   -webkit-user-select: none;
 }
+ul li:hover {
+  background-color: lightgray;
+}
 
 ul li:first-child {
   border-top: 0;

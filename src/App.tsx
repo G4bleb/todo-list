@@ -17,16 +17,21 @@ startingArr.forEach((item) => {
 
 function App() {
   const [items, setItems] = useState(startingItems);
-  const onNewItem = (newItemName: string) => {
+  const addItem = (newItemName: string) => {
     const newMap = new Map(items);
     newMap.set(uuid(), { name: newItemName, crossedOut: false });
     setItems(newMap);
   };
-  const onItemClick = (id: string) => {
+  const crossItem = (id: string) => {
     const newItem = items.get(id) as Item;
     newItem.crossedOut = !newItem.crossedOut;
     const newMap = new Map(items);
     newMap.set(id, newItem);
+    setItems(newMap);
+  };
+  const deleteItem = (id: string) => {
+    const newMap = new Map(items);
+    newMap.delete(id);
     setItems(newMap);
   };
 
@@ -36,10 +41,11 @@ function App() {
     <div className="App">
       {itemsList({
         items,
-        onItemClick: onItemClick,
+        onItemClick: crossItem,
+        onDelClick: deleteItem,
       })}
       {addItemForm({
-        onSubmit: onNewItem,
+        onSubmit: addItem,
       })}
     </div>
   );

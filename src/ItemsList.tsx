@@ -3,9 +3,11 @@ import { Item } from "./interfaces/Item";
 export function itemsList({
   items,
   onItemClick,
+  onDelClick,
 }: {
   items: Map<string, Item>;
   onItemClick(id: string): void;
+  onDelClick(id: string): void;
 }) {
   const elems: JSX.Element[] = [];
   items.forEach((item, id) => {
@@ -15,9 +17,19 @@ export function itemsList({
           onItemClick(id);
         }}
         key={id}
-        style={item.crossedOut ? { textDecoration: "line-through" } : {}}
       >
-        {item.name}
+        <span style={item.crossedOut ? { textDecoration: "line-through" } : {}}>
+          {item.name}
+        </span>
+
+        <span
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelClick(id);
+          }}
+        >
+          ❌
+        </span>
       </li>
     );
   });

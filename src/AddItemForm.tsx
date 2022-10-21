@@ -6,7 +6,6 @@ export function addItemForm({ onSubmit }: { onSubmit(newItem: string): void }) {
     const target = e.target as typeof e.target & {
       item: HTMLInputElement;
     };
-    console.log(target.item.value);
     onSubmit(target.item.value);
   };
 

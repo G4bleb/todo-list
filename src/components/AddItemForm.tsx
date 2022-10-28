@@ -6,7 +6,11 @@ export function addItemForm({ onSubmit }: { onSubmit(newItem: string): void }) {
     const target = e.target as typeof e.target & {
       item: HTMLInputElement;
     };
-    onSubmit(target.item.value);
+    const value = target.item.value;
+    if (!value) {
+      return;
+    }
+    onSubmit(value);
   };
 
   return (
@@ -20,7 +24,7 @@ export function addItemForm({ onSubmit }: { onSubmit(newItem: string): void }) {
         type="submit"
         name="submit"
         value="Add"
-        className="border border-gray-300 mx-1 px-2 w-full hover:bg-gray-200 rounded"
+        className="border border-gray-200 mx-1 px-2 w-full hover:bg-gray-200 rounded shadow-sm"
       ></input>
     </form>
   );

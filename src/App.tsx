@@ -1,24 +1,25 @@
-import React, { useState } from "react";
-import { addItemForm } from "./AddItemForm";
-import { itemsList } from "./ItemsList";
+import { useState } from "react";
+import { addItemForm } from "./components/AddItemForm";
+import { itemsList } from "./components/TodoList/TodoList";
 import { Item } from "./interfaces/Item";
 import { v4 as uuid } from "uuid";
 
 const startingArr: Item[] = [
-  { name: "item 1", crossedOut: false },
-  { name: "item 2", crossedOut: false },
+  { id: "example1", name: "item 1", crossedOut: false },
+  { id: "example2", name: "item 2", crossedOut: false },
 ];
 
 const startingItems: Map<string, Item> = new Map();
 startingArr.forEach((item) => {
-  startingItems.set(uuid(), item);
+  startingItems.set(item.id, item);
 });
 
 function App() {
   const [items, setItems] = useState(startingItems);
   const addItem = (newItemName: string) => {
     const newMap = new Map(items);
-    newMap.set(uuid(), { name: newItemName, crossedOut: false });
+    const id = uuid();
+    newMap.set(id, { id, name: newItemName, crossedOut: false });
     setItems(newMap);
   };
   const crossItem = (id: string) => {

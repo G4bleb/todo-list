@@ -1,4 +1,4 @@
-import { Item } from "../../interfaces/Item";
+import { Item } from "interfaces/Item";
 import { ItemElement } from "./TodoListItem";
 
 export function itemsList({

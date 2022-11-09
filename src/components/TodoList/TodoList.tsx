@@ -1,18 +1,18 @@
 import { Item } from "interfaces/Item";
-import { ItemElement } from "./TodoListItem";
+import { TodoListItem } from "./TodoListItem";
 
-export function itemsList({
+export function TodoList({
   items,
   onItemClick,
   onDelClick,
 }: {
-  items: Map<string, Item>;
-  onItemClick(id: string): void;
-  onDelClick(id: string): void;
+  items: Item[];
+  onItemClick(id: number): void;
+  onDelClick(id: number): void;
 }) {
   const elems: JSX.Element[] = [];
-  items.forEach((item) => {
-    elems.push(ItemElement({ item, onItemClick, onDelClick }));
+  items.forEach((item, index) => {
+    elems.push(TodoListItem({ index, item, onItemClick, onDelClick }));
   });
   return <ul className="border border-gray-300 rounded-lg w-80">{elems}</ul>;
 }

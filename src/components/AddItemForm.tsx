@@ -1,6 +1,6 @@
 import { FormEvent } from "react";
 
-export function addItemForm({ onSubmit }: { onSubmit(newItem: string): void }) {
+export function AddItemForm({ onSubmit }: { onSubmit(newItem: string): void }) {
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {

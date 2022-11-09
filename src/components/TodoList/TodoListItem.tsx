@@ -1,21 +1,23 @@
 import { Item } from "interfaces/Item";
 
-export function ItemElement({
+export function TodoListItem({
+  index,
   item,
   onItemClick,
   onDelClick,
 }: {
+  index: number
   item: Item;
-  onItemClick(id: string): void;
-  onDelClick(id: string): void;
+  onItemClick(id: number): void;
+  onDelClick(id: number): void;
 }) {
   return (
     <li
       className="border-t border-t-gray-300 first:border-t-0 first:rounded-t-lg last:rounded-b-lg hover:bg-gray-100 p-2 flex content-between justify-between select-none hover:cursor-pointer"
       onClick={() => {
-        onItemClick(item.id);
+        onItemClick(index);
       }}
-      key={item.id}
+      key={index}
     >
       <span style={item.crossedOut ? { textDecoration: "line-through" } : {}}>
         {item.name}
@@ -24,7 +26,7 @@ export function ItemElement({
       <span
         onClick={(e) => {
           e.stopPropagation();
-          onDelClick(item.id);
+          onDelClick(index);
         }}
       >
         ❌

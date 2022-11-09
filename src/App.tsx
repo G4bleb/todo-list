@@ -1,48 +1,41 @@
 import { useState } from "react";
-import { addItemForm } from "./components/AddItemForm";
-import { itemsList } from "./components/TodoList/TodoList";
+import { AddItemForm } from "./components/AddItemForm";
+import { TodoList } from "./components/TodoList/TodoList";
 import { Item } from "./interfaces/Item";
 import { v4 as uuid } from "uuid";
-
-const startingArr: Item[] = [
+const startingItems: Item[] = [
   { id: "example1", name: "item 1", crossedOut: false },
   { id: "example2", name: "item 2", crossedOut: false },
 ];
 
-const startingItems: Map<string, Item> = new Map();
-startingArr.forEach((item) => {
-  startingItems.set(item.id, item);
-});
-
 function App() {
   const [items, setItems] = useState(startingItems);
   const addItem = (newItemName: string) => {
-    const newMap = new Map(items);
+    const newArray = items.slice();
     const id = uuid();
-    newMap.set(id, { id, name: newItemName, crossedOut: false });
-    setItems(newMap);
+    newArray.push({ id, name: newItemName, crossedOut: false });
+    setItems(newArray);
   };
-  const crossItem = (id: string) => {
-    const newItem = items.get(id) as Item;
+  const crossItem = (id: number) => {
+    const newArray = items.slice();
+    const newItem = newArray[id];
     newItem.crossedOut = !newItem.crossedOut;
-    const newMap = new Map(items);
-    newMap.set(id, newItem);
-    setItems(newMap);
+    setItems(newArray);
   };
-  const deleteItem = (id: string) => {
-    const newMap = new Map(items);
-    newMap.delete(id);
-    setItems(newMap);
+  const deleteItem = (id: number) => {
+    const newArray = items.slice();
+    delete newArray[id];
+    setItems(newArray);
   };
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
-      {itemsList({
+      {TodoList({
         items,
         onItemClick: crossItem,
         onDelClick: deleteItem,
       })}
-      {addItemForm({
+      {AddItemForm({
         onSubmit: addItem,
       })}
     </div>

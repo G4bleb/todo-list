@@ -3,6 +3,7 @@ import { AddItemForm } from "./components/AddItemForm";
 import { TodoList } from "./components/TodoList/TodoList";
 import { Item } from "./interfaces/Item";
 import { v4 as uuid } from "uuid";
+
 const startingItems: Item[] = [
   { id: "example1", name: "item 1", crossedOut: false },
   { id: "example2", name: "item 2", crossedOut: false },

@@ -24,8 +24,9 @@ export class FirebaseStorage implements StorageProvider {
   // }
 
   public async getUserItems(userId: string): Promise<Item[]> {
+    // get only current user items ?
     try {
-      const document = doc(this.users, userId, "items");
+      const document = doc(this.users, userId);
       const res = await getDoc(document);
       return res.get("items") as Item[];
     } catch (e) {

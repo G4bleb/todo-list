@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddItemForm } from "./AddItemForm";
 import { TodoList } from "./TodoList";
 import { Item } from "interfaces/Item";
 import { v4 as uuid } from "uuid";
 
-const startingItems: Item[] = [
-  { id: "example1", name: "item 1", crossedOut: false },
-  { id: "example2", name: "item 2", crossedOut: false },
-];
+import { storageProvider } from "services";
 
 export function TodoApp() {
-  const [items, setItems] = useState(startingItems);
+  const [items, setItems] = useState<Item[]>([]);
+  useEffect(() => {
+    async function fetchData() {
+      const it = await storageProvider.getUserItems();
+      setItems(it);
+    }
+    fetchData();
+  }, []);
   const addItem = (newItemName: string) => {
     const newArray = items.slice();
     const id = uuid();
@@ -31,14 +35,8 @@ export function TodoApp() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
-      {TodoList({
-        items,
-        onItemClick: crossItem,
-        onDelClick: deleteItem,
-      })}
-      {AddItemForm({
-        onSubmit: addItem,
-      })}
+      <TodoList items={items} onItemClick={crossItem} onDelClick={deleteItem} />
+      <AddItemForm onSubmit={addItem} />
     </div>
   );
 }

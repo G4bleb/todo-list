@@ -4,6 +4,20 @@ import { AuthProvider, User } from "../authProvider";
 
 export class FirebaseAuth implements AuthProvider {
   private readonly auth = getAuth(app);
+  private _user: User | null = null;
+
+  public get user(): User | null {
+    return this._user;
+  }
+  private set user(user: User | null) {
+    this._user = user;
+  }
+
+  public constructor() {
+    onAuthStateChanged(this.auth, (user) => {
+      this.user = user;
+    });
+  }
 
   public async login(username: string, password: string): Promise<User | null> {
     try {
@@ -14,9 +28,9 @@ export class FirebaseAuth implements AuthProvider {
     }
   }
 
-  public setOnAuthChange(callback: (user: User) => void): void {
+  public addOnAuthChange(callback: (user: User | null) => void): void {
     onAuthStateChanged(this.auth, (user) => {
-      callback(user as User);
+      callback(user);
     });
   }
 }

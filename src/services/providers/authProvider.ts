@@ -3,6 +3,7 @@ export interface User {
 }
 
 export abstract class AuthProvider {
+  public abstract get user(): User | null;
   public abstract login(username: string, password: string): Promise<User | null>;
-  public abstract setOnAuthChange(callback: (user: User) => void): void;
+  public abstract addOnAuthChange(callback: (user: User | null) => void): void;
 }

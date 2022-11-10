@@ -6,7 +6,7 @@ export function TodoListItem({
   onItemClick,
   onDelClick,
 }: {
-  index: number
+  index: number;
   item: Item;
   onItemClick(id: number): void;
   onDelClick(id: number): void;
@@ -17,11 +17,8 @@ export function TodoListItem({
       onClick={() => {
         onItemClick(index);
       }}
-      key={index}
     >
-      <span style={item.crossedOut ? { textDecoration: "line-through" } : {}}>
-        {item.name}
-      </span>
+      <span style={item.crossedOut ? { textDecoration: "line-through" } : {}}>{item.name}</span>
 
       <span
         onClick={(e) => {

@@ -1,8 +1,7 @@
-import { FormEvent, useContext } from "react";
+import { FormEvent } from "react";
 import { authProvider } from "services";
-import { User } from "services/providers/authProvider";
 
-export function Login({ loggedIn }: { loggedIn: (user: User) => void }) {
+export function Login() {
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
@@ -14,12 +13,7 @@ export function Login({ loggedIn }: { loggedIn: (user: User) => void }) {
     // if (!email || !password) {
     //   return;
     // }
-    const u = await authProvider.login("testuser@test.test", "testuser");
-    if (u) {
-      loggedIn(u);
-    } else {
-      console.log("no");
-    }
+    await authProvider.login(email, password);
   };
 
   return (

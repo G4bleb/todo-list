@@ -1,9 +1,10 @@
 import { app } from ".";
 import { StorageProvider } from "../storageProvider";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
-
-import { collection, addDoc } from "firebase/firestore";
 import { Item } from "interfaces/Item";
+import { authProvider } from "services";
+
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 
 export class FirebaseStorage implements StorageProvider {
   private readonly db = getFirestore(app);
@@ -23,10 +24,10 @@ export class FirebaseStorage implements StorageProvider {
   //   }
   // }
 
-  public async getUserItems(userId: string): Promise<Item[]> {
+  public async getUserItems(): Promise<Item[]> {
     // get only current user items ?
     try {
-      const document = doc(this.users, userId);
+      const document = doc(this.users, authProvider.user?.uid);
       const res = await getDoc(document);
       return res.get("items") as Item[];
     } catch (e) {

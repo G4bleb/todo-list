@@ -12,7 +12,7 @@ export function TodoList({
 }) {
   const elems: JSX.Element[] = [];
   items.forEach((item, index) => {
-    elems.push(TodoListItem({ index, item, onItemClick, onDelClick }));
+    elems.push(<TodoListItem {...{ key: index, index, item, onItemClick, onDelClick }} />);
   });
   return <ul className="border border-gray-300 rounded-lg w-80">{elems}</ul>;
 }

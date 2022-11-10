@@ -8,29 +8,36 @@ import { storageProvider } from "services";
 
 export function TodoApp() {
   const [items, setItems] = useState<Item[]>([]);
+
+  const setItemsWrapper = async (newArray: Item[]) => {
+    setItems(newArray);
+    await storageProvider.setUserItems(newArray);
+  };
+
   useEffect(() => {
-    async function fetchData() {
+    async function fetch() {
       const it = await storageProvider.getUserItems();
       setItems(it);
     }
-    fetchData();
+    fetch();
   }, []);
+
   const addItem = (newItemName: string) => {
     const newArray = items.slice();
     const id = uuid();
     newArray.push({ id, name: newItemName, crossedOut: false });
-    setItems(newArray);
+    setItemsWrapper(newArray);
   };
   const crossItem = (id: number) => {
     const newArray = items.slice();
     const newItem = newArray[id];
     newItem.crossedOut = !newItem.crossedOut;
-    setItems(newArray);
+    setItemsWrapper(newArray);
   };
   const deleteItem = (id: number) => {
     const newArray = items.slice();
-    delete newArray[id];
-    setItems(newArray);
+    newArray.splice(id, 1);
+    setItemsWrapper(newArray);
   };
 
   return (

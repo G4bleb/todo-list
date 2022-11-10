@@ -18,9 +18,14 @@ export function Login() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
-      <form className="w-80 flex justify-between pt-2" onSubmit={submitHandler}>
-        <input type="email" name="email" className="border border-gray-300 p-1 rounded"></input>
-        <input type="password" name="password" className="border border-gray-300 p-1 rounded"></input>
+      <form className="w-80 flex flex-col" onSubmit={submitHandler}>
+        <input type="email" name="email" placeholder="email" className="border border-gray-300 p-1 rounded"></input>
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          className="border border-gray-300 p-1 rounded"
+        ></input>
         <input
           type="submit"
           name="submit"

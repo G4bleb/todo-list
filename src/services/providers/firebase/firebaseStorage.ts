@@ -3,7 +3,7 @@ import { StorageProvider } from "../storageProvider";
 import { Item } from "interfaces/Item";
 import { authProvider } from "services";
 
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { collection } from "firebase/firestore";
 
 export class FirebaseStorage implements StorageProvider {
@@ -33,6 +33,17 @@ export class FirebaseStorage implements StorageProvider {
     } catch (e) {
       console.error("Error getting user items: ", e);
       return [];
+    }
+  }
+
+  public async setUserItems(items: Item[]): Promise<void> {
+    try {
+      const document = doc(this.users, authProvider.user?.uid);
+      console.log("setUserItems", items);
+
+      await setDoc(document, { items });
+    } catch (e) {
+      console.error("Error setting user items: ", e);
     }
   }
 }

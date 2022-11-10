@@ -2,7 +2,6 @@ import { Item } from "interfaces/Item";
 
 export abstract class StorageProvider {
   public abstract getUserItems(): Promise<Item[]>;
-  //read items (matching logged-in uid)
+  public abstract setUserItems(items: Item[]): Promise<void>;
   //set item
-  //set items ?
 }

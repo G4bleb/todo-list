@@ -6,12 +6,11 @@ import { User } from "services/providers/authProvider";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
-  console.log("App called", user);
 
   useEffect(() => {
     authProvider.addOnAuthChange((user) => {
       setUser(user);
-      console.log("setOnAuthChange");
+      console.log("auth change");
     });
   }, []);
 
